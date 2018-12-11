@@ -8,7 +8,7 @@ from scipy.linalg import solve_banded
 from scipy.ndimage.filters import uniform_filter
 from scipy.sparse.linalg import spsolve
 from sklearn.preprocessing import normalize
-
+import cv2
 import cartesian
 import color_conv
 
@@ -32,8 +32,8 @@ def find_marked_locations(bw, marked):
 
 def std_matrix(A):
     S = np.empty_like(A)
-    for i in xrange(A.shape[0]):
-        for j in xrange(A.shape[1]):
+    for i in range(A.shape[0]):
+        for j in range(A.shape[1]):
             S[i, j] = np.square(np.std(neighborhood(A, [i, j])))
     return S
 
@@ -42,12 +42,12 @@ def build_weights_matrix(Y):
     (n, m) = [Y.shape[0], Y.shape[1]]
     S = std_matrix(Y)
     size = n * m
-    cart = cartesian.cartesian([xrange(n), xrange(m)])
+    cart = cartesian.cartesian([range(n), range(m)])
     cart_r = cart.reshape(n, m, 2)
     xy2idx = np.arange(size).reshape(n, m)  # [x,y] -> index
     W = sparse.lil_matrix((size, size))
-    for i in xrange(Y.shape[0]):
-        for j in xrange(Y.shape[1]):
+    for i in range(Y.shape[0]):
+        for j in range(Y.shape[1]):
             idx = xy2idx[i, j]
             N = neighborhood(cart_r, [i, j]).reshape(-1, 2)
             N = [tuple(neighbor) for neighbor in N]
@@ -64,7 +64,7 @@ def build_weights_matrix(Y):
 
 def run():
     extension = 'bmp'
-    pic = sys.argv[1] if len(sys.argv) > 1 else 'smiley'
+    pic = sys.argv[1] if len(sys.argv) > 1 else 'herseyim'
     name = 'samples/' + pic
     bw_filename = name + '.' + extension
     marked_filename = name + '_marked.' + extension

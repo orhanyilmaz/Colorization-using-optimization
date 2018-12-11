@@ -1,6 +1,6 @@
 import numpy as np
 
-
+#0.144
 def rgb2yiq(rgb):
     rgb = rgb / 255.0
     y = np.clip(np.dot(rgb, np.array([0.299, 0.587, 0.144])),             0,   1)
