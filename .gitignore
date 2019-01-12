@@ -52,5 +52,4 @@ docs/_build/
 
 # PyBuilder
 target/
-/samples
 *.mtx

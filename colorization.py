@@ -64,7 +64,7 @@ def build_weights_matrix(Y):
 
 def run():
     extension = 'bmp'
-    pic = sys.argv[1] if len(sys.argv) > 1 else 'herseyim'
+    pic = sys.argv[1] if len(sys.argv) > 1 else 'yellow_res'
     name = 'samples/' + pic
     bw_filename = name + '.' + extension
     marked_filename = name + '_marked.' + extension
@@ -77,7 +77,6 @@ def run():
     marked = color_conv.rgb2yiq(marked_rgb)
 
     Y = np.array(bw[:, :, 0], dtype='float64')
-
     (n, m) = np.shape(bw)[0:2]  # extract image dimensions
     size = n * m
     Wn = 0
